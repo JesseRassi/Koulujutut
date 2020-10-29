@@ -1,0 +1,91 @@
+using System;
+
+namespace Kapselointi
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Hissi hissi = new Hissi(5);
+            hissi.kerrosYlosAlas("ylos");
+            hissi.kerrosYlosAlas("ylos");
+            hissi.Kerros = 10; // Tämä on setteri nyt private näkyy.
+            
+            /*hissi.kerros = 10;*/ // ei toimi koska private
+            //hissi.tulostaTiedot(); // ei toimi koska private
+            Console.WriteLine("Tämän hetkinen kerros: " + hissi.Kerros);
+
+
+            Console.ReadKey();
+        }
+    }
+
+    class Hissi
+    {
+        //Attribuutti
+        //Attribuutit kirjotetaan pienellä!!
+        //private = kapselointi
+        private int kerros; //jos ei määritellä näkyvyyttä, se on oletuksena private, 
+        private int maxKerros;
+        
+        public int Kerros
+        {
+            //Setteri saadaan piilotettu (Private) näkymään.
+            set
+            {
+                if(value <= maxKerros)
+                {
+                    kerros = value;
+                }
+                else
+                {
+                    kerros = maxKerros;
+                }
+                
+            }
+            //Getteri
+            get
+            {
+                return kerros;
+            }
+        }
+
+
+
+        //Oletusmuodostin
+        public Hissi()
+        {
+            kerros = 1;
+            maxKerros = 1;
+        }
+
+        //Muodostin
+        public Hissi(int kerrostenLkm)
+        {
+            kerros = 1;
+            maxKerros = kerrostenLkm;
+        }
+
+        
+        private void tulostaTiedot()
+        {
+            Console.WriteLine("Hissi-olion tiedot:");
+            Console.WriteLine("Kerros:  " + kerros);
+        }
+
+        //Metodi
+        public void kerrosYlosAlas(string suunta)
+        {
+            if (suunta == "alas")
+            {
+                kerros--;
+            }
+            else
+            {
+                kerros++;
+            }
+
+            tulostaTiedot(); //Tämä ei löydy mainista koska private.
+        }
+    }
+}
