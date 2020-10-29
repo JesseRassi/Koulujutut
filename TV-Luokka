@@ -1,0 +1,53 @@
+using System;
+
+namespace TV_Luokka
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Tv tv1 = new Tv();
+            tv1.VaihdaKanava();
+
+        }
+
+        class Tv
+        {
+            public int kanava;
+            public bool paalla;
+
+
+            public Tv()
+            {
+                kanava = 1;
+                paalla = true;
+
+                
+
+            }
+                                                 
+            public void Sammuta()
+            {                                           
+                    paalla = false;
+                    Console.WriteLine("TV on pois päältä");                                               
+            }
+
+            public void VaihdaKanava()
+            {
+                do
+                {
+                    Console.WriteLine("Kaukosäätimen toiminnot");
+                    Console.WriteLine("Sammuta: 0");
+                    Console.WriteLine("Valitse kanava 1-9");
+                    kanava = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Kanava on " + kanava);
+                    if (kanava == 0)
+                    {
+                        Sammuta();
+                    }
+                } while (kanava >= 1);
+
+            }
+        }
+    }
+}
